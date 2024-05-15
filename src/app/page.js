@@ -18,12 +18,12 @@ const Voucher = () => {
     { title: "Morning Snacks", amount: 1.24 },
     { title: "Grand Total", amount: 5.5 },
   ];
-  const [totalDalDays, setTotalDalDays] = useState(0);
-  const [totalSoyaDays, setTotalSoyaDays] = useState(0);
-  const [totalPreSchoolChildren, setTotalPreSchoolChildren] = useState(0);
-  const [totalChildren, setTotalChildren] = useState(0);
-  const [totalPW, setTotalPW] = useState(0);
-  const [totalLW, setTotalLW] = useState(0);
+  const [totalDalDays, setTotalDalDays] = useState("");
+  const [totalSoyaDays, setTotalSoyaDays] = useState("");
+  const [totalPreSchoolChildren, setTotalPreSchoolChildren] = useState("");
+  const [totalChildren, setTotalChildren] = useState("");
+  const [totalPW, setTotalPW] = useState("");
+  const [totalLW, setTotalLW] = useState("");
 
   const totalEgg = parseInt(totalDalDays, 10) + parseInt(totalSoyaDays, 10);
   const grandTotalEgg =
@@ -116,9 +116,9 @@ const Voucher = () => {
     <div className="voucher">
       <div className="header">
         <Image src={logo} alt="" height={90} width={100} />
-        <h3 className="main-title txt-center">
+        {/* <h3 className="main-title txt-center">
           Wellcome to <h2>My Voucher</h2>
-        </h3>
+        </h3> */}
       </div>
       <div className="top-section">
         <div className="input-item flex-col-gap">
@@ -142,7 +142,7 @@ const Voucher = () => {
           />
         </div>
         <div className="input-item flex-col-gap">
-          <span className="placeholder">Total pre-school children </span>
+          <span className="placeholder">Total pre-school children present </span>
           <input
             type="number"
             className="input"
@@ -185,6 +185,7 @@ const Voucher = () => {
           />
         </div>
       </div>
+      <div className="wrapper">
       <div className=" bottom-secttion">
         <div className="item">
           <h4 className="title">Food Stuff</h4>
@@ -195,7 +196,7 @@ const Voucher = () => {
               </div>
             ))}
         </div>
-        <div className="total-quantity-supplied">
+        <div className="item total-quantity-supplied">
           <h4 className="title">Total quantity supplied during the month</h4>
           {data &&
             data.map((_, index) => {
@@ -203,7 +204,7 @@ const Voucher = () => {
                 <div className="voucher-column" key={index}>
                   {totalDalDays
                     ? index !== 10 && Number(calculateFoodQnt(index)).toFixed(3)
-                    : ""}
+                    : "__"}
                   {totalLW &&
                     totalPW &&
                     index === 10 &&
@@ -212,7 +213,7 @@ const Voucher = () => {
               );
             })}
         </div>
-        <div className="rate-per-kg">
+        <div className="item rate-per-kg">
           <h4 className="title">Rate/Kg</h4>
           {data &&
             data.map((item, index) => (
@@ -221,7 +222,7 @@ const Voucher = () => {
               </div>
             ))}
         </div>
-        <div className="total-Cost">
+        <div className="item total-Cost">
           <h4 className="title">Total Cost of food stuff supplied</h4>
           {data &&
             data.map((_, index) => {
@@ -234,6 +235,7 @@ const Voucher = () => {
               );
             })}
         </div>
+      </div>
       </div>
       <div className="mid-section">
         <div style={{ display: "flex", gap: "10px" }}>

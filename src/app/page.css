@@ -1,7 +1,7 @@
 .voucher {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 3rem;
     padding: 10px;
   }
 
@@ -35,6 +35,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* width: min-content; */
   }
 
  
@@ -49,12 +50,23 @@
 .input-item{
     min-width: 14rem;
 }
+.wrapper{
+  overflow: scroll;
+}
+.wrapper::-webkit-scrollbar{
+  display: none;
+}
 
   .bottom-secttion{
     display: flex;
+    width: fit-content;
+    margin: 0 auto;
     overflow: auto;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .item{
+    width: 10rem;
   }
 
   .input{
@@ -73,6 +85,8 @@
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    width: fit-content;
+    margin: 0 auto;
   }
   
   .voucher-row {
@@ -83,6 +97,6 @@
     border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
-    width: 10rem;
+    width: 100%;
   }
   
