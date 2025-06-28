@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import "./page.css";
 import Image from "next/image";
 import logo from "../../public/logo.png";
+import MonthYearDropdown from "./component/Date_Component";
 
 const Voucher = () => {
   const data = [
@@ -22,8 +23,16 @@ const Voucher = () => {
   const [totalSoyaDays, setTotalSoyaDays] = useState("");
   const [totalPreSchoolChildren, setTotalPreSchoolChildren] = useState("");
   const [totalChildren, setTotalChildren] = useState("");
+  const [totalKishori, setTotalKishori] = useState("");
   const [totalPW, setTotalPW] = useState("");
   const [totalLW, setTotalLW] = useState("");
+
+  const [selectedDate, setSelectedDate] = useState({ month: "", year: "" });
+
+  const handleDateChange = (value) => {
+    setSelectedDate(value);
+    console.log("Selected Date in Parent:", value);
+  };
 
   const totalEgg = parseInt(totalDalDays, 10) + parseInt(totalSoyaDays, 10);
   const grandTotalEgg =
@@ -74,7 +83,8 @@ const Voucher = () => {
   }, 0);
 
   const totalCostValue = totalPreSchoolChildren * data[8].amount;
-  // const totalCostWithoutFuel = totalCostValue - totalPreSchoolChildren * 0.5;
+  const totalCostWithoutFuel = totalPreSchoolChildren * 0.5; // need to add
+  const kishori = totalPreSchoolChildren * 80; // need to add
   const snacksValue = totalPreSchoolChildren * data[9].amount;
   const grandTotal = grandTotalEgg * data[10].amount;
 
@@ -120,9 +130,12 @@ const Voucher = () => {
           Wellcome to <h2>My Voucher</h2>
         </h3> */}
       </div>
+      <>
+        <MonthYearDropdown onChange={handleDateChange} />
+      </>
       <div className="top-section">
         <div className="input-item flex-col-gap">
-          <span className="placeholder">Total dal Days </span>
+          <span className="placeholder">Total children in dal Days </span>
           <input
             type="number"
             className="input"
@@ -132,7 +145,7 @@ const Voucher = () => {
         </div>
 
         <div className="input-item flex-col-gap">
-          <span className="placeholder">Total Soya Days </span>
+          <span className="placeholder">Total Children in Soya Days </span>
           <input
             type="number"
             className="input"
@@ -142,7 +155,9 @@ const Voucher = () => {
           />
         </div>
         <div className="input-item flex-col-gap">
-          <span className="placeholder">Total pre-school children present </span>
+          <span className="placeholder">
+            Total pre-school children present{" "}
+          </span>
           <input
             type="number"
             className="input"
@@ -184,80 +199,115 @@ const Voucher = () => {
             onChange={(e) => setTotalLW(e.target.value)}
           />
         </div>
+        <div className="input-item flex-col-gap">
+          <span className="placeholder">Kishori</span>
+          <input
+            type="number"
+            className="input"
+            placeholder="Total Kishori"
+            value={totalKishori}
+            onChange={(e) => setTotalKishori(e.target.value)}
+          />
+        </div>
       </div>
+      <p style={{ margin: "0 auto" }}>
+        {selectedDate.month} {selectedDate.year}
+      </p>
       <div className="wrapper">
-      <div className=" bottom-secttion">
-        <div className="item">
-          <h4 className="title">Food Stuff</h4>
-          {data &&
-            data.map((item, index) => (
-              <div className="voucher-column" key={index}>
-                {item.title}
-              </div>
-            ))}
-        </div>
-        <div className="item total-quantity-supplied">
-          <h4 className="title">Total quantity supplied during the month</h4>
-          {data &&
-            data.map((_, index) => {
-              return (
+        <div className=" bottom-secttion">
+          <div className="item">
+            <h4 className="title">Food Stuff</h4>
+            {data &&
+              data.map((item, index) => (
                 <div className="voucher-column" key={index}>
-                  {totalDalDays
-                    ? index !== 10 && Number(calculateFoodQnt(index)).toFixed(3)
-                    : "__"}
-                  {totalLW &&
-                    totalPW &&
-                    index === 10 &&
-                    `(${totalLW} + ${totalPW} + ${totalChildren}) * 12 = ${grandTotalEgg}`}
+                  {item.title}
                 </div>
-              );
-            })}
-        </div>
-        <div className="item rate-per-kg">
-          <h4 className="title">Rate/Kg</h4>
-          {data &&
-            data.map((item, index) => (
-              <div className="voucher-column" key={index}>
-                {item.amount}
-              </div>
-            ))}
-        </div>
-        <div className="item total-Cost">
-          <h4 className="title">Total Cost of food stuff supplied</h4>
-          {data &&
-            data.map((_, index) => {
-              return (
-                <div className="voucher-column" key={index}>
-                  {totalDalDays
-                    ? Number(calculateFoodCost(index)).toFixed(2)
-                    : "__"}
-                </div>
-              );
-            })}
-        </div>
-      </div>
-      </div>
-      <div className="mid-section">
-        <div style={{ display: "flex", gap: "10px" }}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span>Hot Cook</span>
-            <span>Snacks </span>
-            <span>Grand Total </span>
+              ))}
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span>:{totalCostValue}</span>
-            <span>:{snacksValue}</span>
-            <span>:{grandTotal}</span>
+          <div className="item total-quantity-supplied">
+            <h4 className="title">Total quantity supplied during the month</h4>
+            {data &&
+              data.map((_, index) => {
+                return (
+                  <div className="voucher-column" key={index}>
+                    {totalDalDays
+                      ? index !== 10 &&
+                        Number(calculateFoodQnt(index)).toFixed(3)
+                      : "__"}
+                    {totalLW &&
+                      totalPW &&
+                      index === 10 &&
+                      `(${totalLW} + ${totalPW} + ${totalChildren}) * 12 = ${grandTotalEgg}`}
+                  </div>
+                );
+              })}
+          </div>
+          <div className="item rate-per-kg">
+            <h4 className="title">Rate/Kg</h4>
+            {data &&
+              data.map((item, index) => (
+                <div className="voucher-column" key={index}>
+                  {item.amount}
+                </div>
+              ))}
+          </div>
+          <div className="item total-Cost">
+            <h4 className="title">Total Cost of food stuff supplied</h4>
+            {data &&
+              data.map((_, index) => {
+                return (
+                  <div className="voucher-column" key={index}>
+                    {totalDalDays
+                      ? Number(calculateFoodCost(index)).toFixed(2)
+                      : "__"}
+                  </div>
+                );
+              })}
           </div>
         </div>
+      </div>
+      <div>
+        <div className="mid-section">
+          <div style={{ display: "flex", gap: "10px" }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span>Hot Cook</span>
+              <span>Snacks </span>
+              <span>Grand Total </span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span>:{totalCostValue}</span>
+              <span>:{snacksValue}</span>
+              <span>:{grandTotal ? grandTotal : 0}</span>
+            </div>
+          </div>
 
+          <div
+            className="line"
+            style={{ width: "100%", height: "2px", background: "black" }}
+          ></div>
+          <div>
+            <span>Total </span>
+            <span>: {totalAmount ? totalAmount : 0}</span>
+          </div>
+        </div>
         <div
-          className="line"
-          style={{ width: "100%", height: "2px", background: "black" }}
-        ></div>
-        <div>
-          <span>Total </span>
-          <span>: {totalAmount}</span>
+          style={{
+            display: "flex",
+            gap: "10px",
+            justifyContent: "center",
+            marginTop: "1.5rem",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span>Kishori</span>
+            <span>Fuel </span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span>:{`${totalKishori} X 80 = ${kishori}`}</span>
+            <span>
+              :{`${totalPreSchoolChildren} X .50ps = ${totalCostWithoutFuel}`}
+            </span>
+          </div>
         </div>
       </div>
     </div>
