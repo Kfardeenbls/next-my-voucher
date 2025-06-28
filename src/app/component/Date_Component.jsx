@@ -20,7 +20,7 @@ export default function MonthYearDropdown({ onChange }) {
   ];
 
   const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 4 }, (_, i) => currentYear - 5 + i);
+  const years = Array.from({ length: 4 }, (_, i) => currentYear - 2 + i);
 
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
