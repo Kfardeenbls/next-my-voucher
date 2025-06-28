@@ -83,8 +83,8 @@ const Voucher = () => {
   }, 0);
 
   const totalCostValue = totalPreSchoolChildren * data[8].amount;
-  const totalCostWithoutFuel = totalPreSchoolChildren * 0.5; // need to add
-  const kishori = totalPreSchoolChildren * 80; // need to add
+  const totalCostWithoutFuel = totalPreSchoolChildren * 0.5;
+  const kishori = totalKishori * 80;
   const snacksValue = totalPreSchoolChildren * data[9].amount;
   const grandTotal = grandTotalEgg * data[10].amount;
 
