@@ -4,20 +4,21 @@ import "./page.css";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import MonthYearDropdown from "./component/Date_Component";
+import Kishori from "./component/Kishori";
 
 const Voucher = () => {
   const data = [
     { title: "Dal", amount: 80 },
     { title: "Soya Chunk", amount: 75 },
-    { title: "Egg", amount: 5.5 },
+    { title: "Egg", amount: 7 },
     { title: "Oil", amount: 100 },
     { title: "Condiments", amount: 0.32 },
     { title: "Fuel", amount: "__" },
     { title: "Others/lemon", amount: 0.1 },
     { title: "Vegetable", amount: 30 },
-    { title: "Total Cost", amount: 5.96 },
+    { title: "Total Cost", amount: 6.46 },
     { title: "Morning Snacks", amount: 1.24 },
-    { title: "Grand Total", amount: 5.5 },
+    { title: "Grand Total", amount: 7 },
   ];
   const [totalDalDays, setTotalDalDays] = useState("");
   const [totalSoyaDays, setTotalSoyaDays] = useState("");
@@ -84,7 +85,7 @@ const Voucher = () => {
 
   const totalCostValue = totalPreSchoolChildren * data[8].amount;
   const totalCostWithoutFuel = totalPreSchoolChildren * 0.5;
-  const kishori = totalKishori * 80;
+
   const snacksValue = totalPreSchoolChildren * data[9].amount;
   const grandTotal = grandTotalEgg * data[10].amount;
 
@@ -201,13 +202,7 @@ const Voucher = () => {
         </div>
         <div className="input-item flex-col-gap">
           <span className="placeholder">Kishori</span>
-          <input
-            type="number"
-            className="input"
-            placeholder="Total Kishori"
-            value={totalKishori}
-            onChange={(e) => setTotalKishori(e.target.value)}
-          />
+          <Kishori count={totalKishori} Set_count={setTotalKishori} input={1} />
         </div>
       </div>
       <p style={{ margin: "0 auto" }}>
@@ -303,7 +298,8 @@ const Voucher = () => {
             <span>Fuel </span>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span>:{`${totalKishori} X 80 = ${kishori}`}</span>
+            {/* {"Kishori "} */}
+            <Kishori count={totalKishori} input={0} />
             <span>
               :{`${totalPreSchoolChildren} X .50ps = ${totalCostWithoutFuel}`}
             </span>
