@@ -311,8 +311,8 @@ const Voucher = () => {
               </span>
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span>{totalCostValue}</span>
-              <span>{snacksValue}</span>
+              <span>{Number(totalCostValue).toFixed(2)}</span>
+              <span>{Number(snacksValue).toFixed(2)}</span>
               <span
                 style={{
                   paddingBottom: "0.5rem",

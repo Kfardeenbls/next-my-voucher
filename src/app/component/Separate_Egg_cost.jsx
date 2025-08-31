@@ -20,10 +20,10 @@ const Separate_Egg_cost = ({ Kishori_count, HC_Count, THR_Count }) => {
         style={{ display: "flex", flexDirection: "column" }}
       >
         <span>
-          : {`${Kishori_count} × 16 = ${kishori} × 7 = ${Kishori_price}`}
+          : {`${Kishori_count} × 16 = ${kishori} × 7.00 = ${Kishori_price}`}
         </span>
-        <span>: {`${HC_Count} × 2 = ${HC_price}`}</span>
-        <span>: {`${THR_Count} × 1.5 = ${THR_price}`}</span>
+        <span>: {`${HC_Count} × 2.00 = ${HC_price}`}</span>
+        <span>: {`${THR_Count} × 1.50 = ${THR_price}`}</span>
       </div>
     </div>
   );
